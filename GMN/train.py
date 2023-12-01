@@ -7,6 +7,7 @@ import torch.nn as nn
 import collections
 import time
 import os
+from datetime import datetime
 
 # Set GPU
 os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
@@ -61,6 +62,7 @@ t_start = time.time()
 for i_iter in range(config["training"]["n_training_steps"]):
     model.train(mode=True)
     batch = next(training_data_iter)
+
     if config["training"]["mode"] == "pair":
         node_features, edge_features, from_idx, to_idx, graph_idx, labels = get_graph(
             batch
@@ -68,6 +70,7 @@ for i_iter in range(config["training"]["n_training_steps"]):
         labels = labels.to(device)
     else:
         node_features, edge_features, from_idx, to_idx, graph_idx = get_graph(batch)
+
     graph_vectors = model(
         node_features.to(device),
         edge_features.to(device),
@@ -201,3 +204,9 @@ for i_iter in range(config["training"]["n_training_steps"]):
             model.train()
         print("iter %d, %s, time %.2fs" % (i_iter + 1, info_str, time.time() - t_start))
         t_start = time.time()
+
+if config["save"]:
+    timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+    architecture_params = f"node-{node_feature_dim}_edge-{edge_feature_dim}_mode-{config['training']['mode']}_loss-{config['training']['loss']}"
+    file_name = f"path/to/save/model_state_dict_{timestamp}_{architecture_params}.pth"
+    torch.save(model.state_dict(), file_name)
