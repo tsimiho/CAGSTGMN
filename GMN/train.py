@@ -205,8 +205,8 @@ for i_iter in range(config["training"]["n_training_steps"]):
         print("iter %d, %s, time %.2fs" % (i_iter + 1, info_str, time.time() - t_start))
         t_start = time.time()
 
-if config["save"]:
-    timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-    architecture_params = f"node-{node_feature_dim}_edge-{edge_feature_dim}_mode-{config['training']['mode']}_loss-{config['training']['loss']}"
-    file_name = f"path/to/save/model_state_dict_{timestamp}_{architecture_params}.pth"
-    torch.save(model.state_dict(), file_name)
+torch.save(model.state_dict(), "model.pth")
+timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+architecture_params = f"node-{node_feature_dim}_edge-{edge_feature_dim}_mode-{config['training']['mode']}_loss-{config['training']['loss']}_iter-{config['training']['n_training_steps']}"
+file_name = f"./model_state_dict_{timestamp}_{architecture_params}.pth"
+torch.save(model.state_dict(), file_name)
