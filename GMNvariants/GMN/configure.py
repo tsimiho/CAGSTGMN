@@ -61,7 +61,7 @@ def get_default_config():
             batch_size=20,
             learning_rate=1e-4,
             mode="pair",
-            loss="margin",  # other: hamming
+            loss="cosine",  # other: hamming
             margin=1.0,
             # A small regularizer on the graph vector scales to avoid the graph
             # vectors blowing up.  If numerical issues is particularly bad in the
@@ -74,10 +74,10 @@ def get_default_config():
             # Increase this to train longer.
             n_training_steps=100000,
             # Print training information every this many training steps.
-            print_after=100,
+            print_after=10,
             # Evaluate on validation set every `eval_after * print_after` steps.
             eval_after=10,
         ),
-        evaluation=dict(batch_size=20),
+        evaluation=dict(batch_size=1),
         seed=8,
     )

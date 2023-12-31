@@ -207,6 +207,4 @@ def gmlp_loop(model, optimizer, dataset, silent=False):
                 )
 
         acc, f1, nmi = test(model, data)
-        print(
-            f"{model.name} - Test Accuracy: {acc:.4f}, F1 Score: {f1:.4f}, NMI: {nmi:.4f}"
-        )
+        print(f"{model.name} - Test Accuracy: {acc:.4f}, F1 Score: {f1:.4f}")

@@ -49,29 +49,29 @@ def train(model, optimizer, data, criterion=torch.nn.CrossEntropyLoss()):
     return loss
 
 
-def test(model, data, mask):
+def test(model, data, mask, criterion=torch.nn.CrossEntropyLoss()):
     model.eval()
     out = model(data)
+    loss = criterion(out[data.val_mask], data.y[data.val_mask])
     pred = out.argmax(dim=1)
     correct = pred[mask] == data.y[mask]
     acc = int(correct.sum()) / int(mask.sum())
     f1 = f1_score(data.y[mask], pred[mask], average="weighted")
-    nmi = normalized_mutual_info_score(data.y[mask], pred[mask])
-    return acc, f1, nmi
+    return acc, f1, loss
 
 
 def loop(model, optimizer, dataset, silent=False):
     for data in dataset:
         for epoch in range(1, 201):
             loss = train(model, optimizer, data)
-            val_acc, val_f1, val_nmi = test(model, data, data.val_mask)
-            test_acc, test_f1, test_nmi = test(model, data, data.test_mask)
+            val_acc, val_f1, val_loss = test(model, data, data.val_mask)
+            test_acc, test_f1, test_loss = test(model, data, data.test_mask)
             if epoch % 10 == 0 and not silent:
                 print(
-                    f"Epoch: {epoch:03d}, Loss: {loss:.4f}, Val_Acc: {val_acc:.4f}, Test_Acc: {test_acc:.4f}, Val_F1: {val_f1:.4f}, Test_F1: {test_f1:.4f}, Val_NMI: {val_nmi:.4f}, Test_NMI: {test_nmi:.4f}"
+                    f"Epoch: {epoch:03d}, Loss: {loss:.4f}, Val_Acc: {val_acc:.4f}, Val Loss: {val_loss:.4f}, Test_Acc: {test_acc:.4f}, Val_F1: {val_f1:.4f}, Test_F1: {test_f1:.4f}, Test Loss: {test_loss:.4f}"
                 )
 
-        acc, f1, nmi = test(model, data, data.test_mask)
+        acc, f1, val_loss = test(model, data, data.test_mask)
         print(
-            f"{model.name} - Test Accuracy: {acc:.4f}, F1 Score: {f1:.4f}, NMI: {nmi:.4f}"
+            f"{model.name} - Test Accuracy: {acc:.4f}, F1 Score: {f1:.4f}, Val Loss: {val_loss:.4f}"
         )

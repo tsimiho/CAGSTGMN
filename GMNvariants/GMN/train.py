@@ -151,6 +151,12 @@ for i_iter in range(config["training"]["n_training_steps"]):
                         labels,
                     ) = get_graph(batch)
                     labels = labels.to(device)
+                    print(node_features)
+                    print(edge_features)
+                    print(from_idx)
+                    print(to_idx)
+                    print(graph_idx)
+                    break
                     eval_pairs = model(
                         node_features.to(device),
                         edge_features.to(device),
@@ -205,4 +211,4 @@ for i_iter in range(config["training"]["n_training_steps"]):
         print("iter %d, %s, time %.2fs" % (i_iter + 1, info_str, time.time() - t_start))
         t_start = time.time()
 
-torch.save(model.state_dict(), "model.pth")
+# torch.save(model.state_dict(), "model.pth")

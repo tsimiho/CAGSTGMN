@@ -19,9 +19,9 @@ model_classes = [
     # gcn.GCN,
     # graphsage.SAGE,
     # graphsaint.SAINT,
-    # gat.GAT,
-    graphmlp.GMLP,
-    mlp.MLP,
+    gat.GAT,
+    # graphmlp.GMLP,
+    # mlp.MLP,
 ]
 
 model_dict = {}
@@ -29,7 +29,6 @@ optimizer_dict = {}
 
 for model_class in model_classes:
     model_name = model_class.__name__.lower()
-    print(model_name)
     model = model_class(
         num_classes=dataset.num_classes,
         num_features=dataset.num_features,
@@ -43,4 +42,4 @@ for model_class in model_classes:
     if model_name == "gmlp":
         gmlp_loop(model, optimizer, dataset, silent=True)
     else:
-        loop(model, optimizer, dataset, silent=True)
+        loop(model, optimizer, dataset, silent=False)

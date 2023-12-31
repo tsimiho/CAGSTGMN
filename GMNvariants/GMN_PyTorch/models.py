@@ -1,11 +1,8 @@
 import torch
-from torch_geometric.data import Data
 from torch.nn import functional as F
 
-from .layers import GraphConvolution, GraphAggregator, GraphMatchingConvolution
-from .utils import adj_matrix_to_edge_index
-from .utils import create_batch, trim_feats
-from .utils import acc_f1
+from .layers import GraphAggregator, GraphConvolution, GraphMatchingConvolution
+from .utils import acc_f1, adj_matrix_to_edge_index, create_batch, trim_feats
 
 
 class GenericGNN(torch.nn.Module):

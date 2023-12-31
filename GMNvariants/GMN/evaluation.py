@@ -1,5 +1,6 @@
 from sklearn import metrics
 from loss import *
+from torch.nn.functional import cosine_similarity
 
 
 def exact_hamming_similarity(x, y):
@@ -24,13 +25,15 @@ def compute_similarity(config, x, y):
     Raises:
       ValueError: if loss type is not supported.
     """
-    if config['training']['loss'] == 'margin':
+    if config["training"]["loss"] == "margin":
         # similarity is negative distance
         return -euclidean_distance(x, y)
-    elif config['training']['loss'] == 'hamming':
+    elif config["training"]["loss"] == "hamming":
         return exact_hamming_similarity(x, y)
+    elif config["training"]["loss"] == "cosine":
+        return cosine_similarity(x, y)
     else:
-        raise ValueError('Unknown loss type %s' % config['training']['loss'])
+        raise ValueError("Unknown loss type %s" % config["training"]["loss"])
 
 
 def auc(scores, labels, **auc_args):
@@ -55,5 +58,7 @@ def auc(scores, labels, **auc_args):
 
     labels = (labels + 1) / 2
 
-    fpr, tpr, thresholds = metrics.roc_curve(labels.cpu().detach().numpy(), scores.cpu().detach().numpy())
+    fpr, tpr, thresholds = metrics.roc_curve(
+        labels.cpu().detach().numpy(), scores.cpu().detach().numpy()
+    )
     return metrics.auc(fpr, tpr)

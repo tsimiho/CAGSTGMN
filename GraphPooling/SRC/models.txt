@@ -1,0 +1,7 @@
+Better overall performance:
+    - Graclus (torch_geometric.nn.pool.graclus)
+    - NDP
+
+Specific objective:
+    - MinCut (torch_geometric.nn.dense.mincut_pool)
+    - DiffPool (torch_geometric.nn.dense.diff_pool)
