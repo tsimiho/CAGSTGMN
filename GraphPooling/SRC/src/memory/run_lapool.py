@@ -1,6 +1,6 @@
 import argparse
 
-from tensorflow.keras import Input, Model
+from tensorflow.python.keras import Input, Model
 
 from src.layers.lapool import LaPool
 from src.memory.training import run_experiment

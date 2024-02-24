@@ -1,6 +1,6 @@
 import tensorflow as tf
 from spektral.layers import ops
-from tensorflow.keras import backend as K
+from tensorflow.python.keras import backend as K
 
 
 def upsampling_from_matrix(inputs):

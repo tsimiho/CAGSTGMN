@@ -1,7 +1,7 @@
 import numpy as np
 import scipy.sparse as sp
 from spektral.layers import ops
-from tensorflow.keras import backend as K
+from tensorflow.python.keras import backend as K
 from tqdm import tqdm
 
 

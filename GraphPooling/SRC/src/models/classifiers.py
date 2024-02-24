@@ -1,8 +1,8 @@
 import tensorflow as tf
 from spektral.layers import GlobalSumPool, GraphMasking
 from spektral.models.general_gnn import MLP
-from tensorflow.keras import Model
-from tensorflow.keras.layers import Concatenate
+from tensorflow.python.keras import Model
+from tensorflow.python.keras.layers import Concatenate
 
 from src.layers import GeneralConv
 

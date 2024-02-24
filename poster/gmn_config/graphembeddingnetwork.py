@@ -1,6 +1,6 @@
 import torch
 import torch.nn as nn
-from .segment import unsorted_segment_sum
+from segment import unsorted_segment_sum
 
 
 class GraphEncoder(nn.Module):

@@ -1,10 +1,14 @@
 import inspect
 
 import tensorflow as tf
-from spektral.utils.keras import (deserialize_kwarg, is_keras_kwarg,
-                                  is_layer_kwarg, serialize_kwarg)
-from tensorflow.keras import backend as K
-from tensorflow.keras.layers import Layer
+from spektral.utils.keras import (
+    deserialize_kwarg,
+    is_keras_kwarg,
+    is_layer_kwarg,
+    serialize_kwarg,
+)
+from tensorflow.python.keras import backend as K
+from tensorflow.python.keras.layers import Layer
 
 from src.modules.ops import sparse_connect
 

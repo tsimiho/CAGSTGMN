@@ -3,8 +3,8 @@ import time
 import numpy as np
 import tensorflow as tf
 from spektral.layers import ops
-from tensorflow.keras import backend as K
-from tensorflow.keras.layers import Lambda
+from tensorflow.python.keras import backend as K
+from tensorflow.python.keras.layers import Lambda
 
 from src.autoencoder.training import loss_fn
 from src.models.autoencoders import Autoencoder

@@ -1,13 +1,15 @@
-from evaluation import compute_similarity, auc
-from loss import pairwise_loss, triplet_loss
-from gmn_utils import *
-from configure import *
+import collections
+import os
+import time
+from datetime import datetime
+
 import numpy as np
 import torch.nn as nn
-import collections
-import time
-import os
-from datetime import datetime
+
+from configure import *
+from evaluation import auc, compute_similarity
+from gmn_utils import *
+from loss import pairwise_loss, triplet_loss
 
 # Set GPU
 os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
@@ -57,12 +59,9 @@ else:
     raise ValueError("Unknown training mode: %s" % config["training"]["mode"])
 
 t_start = time.time()
-
-
 for i_iter in range(config["training"]["n_training_steps"]):
     model.train(mode=True)
     batch = next(training_data_iter)
-
     if config["training"]["mode"] == "pair":
         node_features, edge_features, from_idx, to_idx, graph_idx, labels = get_graph(
             batch
@@ -70,7 +69,6 @@ for i_iter in range(config["training"]["n_training_steps"]):
         labels = labels.to(device)
     else:
         node_features, edge_features, from_idx, to_idx, graph_idx = get_graph(batch)
-
     graph_vectors = model(
         node_features.to(device),
         edge_features.to(device),
@@ -118,7 +116,7 @@ for i_iter in range(config["training"]["n_training_steps"]):
         )
 
     optimizer.zero_grad()
-    loss.backward(torch.ones_like(loss))
+    loss.backward(torch.ones_like(loss))  #
     nn.utils.clip_grad_value_(model.parameters(), config["training"]["clip_value"])
     optimizer.step()
 
@@ -151,12 +149,6 @@ for i_iter in range(config["training"]["n_training_steps"]):
                         labels,
                     ) = get_graph(batch)
                     labels = labels.to(device)
-                    print(node_features)
-                    print(edge_features)
-                    print(from_idx)
-                    print(to_idx)
-                    print(graph_idx)
-                    break
                     eval_pairs = model(
                         node_features.to(device),
                         edge_features.to(device),
@@ -200,15 +192,11 @@ for i_iter in range(config["training"]["n_training_steps"]):
                     "pair_auc": np.mean(accumulated_pair_auc),
                     "triplet_acc": np.mean(accumulated_triplet_acc),
                 }
-                info_str = (
-                    info_str
-                    + ", "
-                    + ", ".join(
-                        ["%s %.4f" % ("val/" + k, v) for k, v in eval_metrics.items()]
-                    )
+                info_str += ", " + ", ".join(
+                    ["%s %.4f" % ("val/" + k, v) for k, v in eval_metrics.items()]
                 )
             model.train()
         print("iter %d, %s, time %.2fs" % (i_iter + 1, info_str, time.time() - t_start))
         t_start = time.time()
 
-# torch.save(model.state_dict(), "model.pth")
+torch.save(model.state_dict(), "model64.pth")

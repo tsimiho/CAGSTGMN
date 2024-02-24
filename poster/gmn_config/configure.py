@@ -2,8 +2,8 @@ def get_default_config():
     """The default configs."""
     model_type = "matching"
     # Set to `embedding` to use the graph embedding net.
-    node_state_dim = 32
-    edge_state_dim = 16
+    node_state_dim = 64
+    edge_state_dim = 4
     graph_rep_dim = 128
     graph_embedding_net_config = dict(
         node_state_dim=node_state_dim,
@@ -50,8 +50,8 @@ def get_default_config():
             problem="graph_edit_distance",
             dataset_params=dict(
                 # always generate graphs with 20 nodes and p_edge=0.2.
-                n_nodes_range=[20, 20],
-                p_edge_range=[0.2, 0.2],
+                n_nodes_range=[100, 500],
+                p_edge_range=[0.2, 0.4],
                 n_changes_positive=1,
                 n_changes_negative=2,
                 validation_dataset_size=1000,
@@ -61,7 +61,7 @@ def get_default_config():
             batch_size=20,
             learning_rate=1e-4,
             mode="pair",
-            loss="cosine",  # other: hamming
+            loss="margin",  # other: hamming
             margin=1.0,
             # A small regularizer on the graph vector scales to avoid the graph
             # vectors blowing up.  If numerical issues is particularly bad in the
@@ -72,12 +72,12 @@ def get_default_config():
             # Add gradient clipping to avoid large gradients.
             clip_value=10.0,
             # Increase this to train longer.
-            n_training_steps=100000,
+            n_training_steps=1000,
             # Print training information every this many training steps.
-            print_after=10,
+            print_after=100,
             # Evaluate on validation set every `eval_after * print_after` steps.
             eval_after=10,
         ),
-        evaluation=dict(batch_size=1),
+        evaluation=dict(batch_size=20),
         seed=8,
     )

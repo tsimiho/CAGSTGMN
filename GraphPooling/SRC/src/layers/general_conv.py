@@ -1,9 +1,9 @@
 import tensorflow as tf
 from spektral.layers import ops
 from spektral.layers.convolutional.conv import Conv
-from tensorflow.keras import activations
-from tensorflow.keras.layers import BatchNormalization, Dropout, PReLU
-
+from tensorflow.python.keras import activations
+from tensorflow.python.keras.layers import Dropout, PReLU
+from keras.layers.normalization.batch_normalization import BatchNormalization
 
 class GeneralConv(Conv):
     def __init__(

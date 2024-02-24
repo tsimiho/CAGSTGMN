@@ -2,8 +2,7 @@ import argparse
 
 from src.layers import MinCutPool
 from src.models.poolers import SimplePooler
-from src.spectral_similarity.training import (results_to_file,
-                                              run_experiment)
+from src.spectral_similarity.training import results_to_file, run_experiment
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--name", type=str, default="Grid2d")

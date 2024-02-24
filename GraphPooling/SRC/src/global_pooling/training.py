@@ -2,10 +2,10 @@ import numpy as np
 import tensorflow as tf
 from spektral.datasets import ModelNet, TUDataset
 from spektral.transforms import OneHotLabels
-from tensorflow.keras import backend as K
-from tensorflow.keras.losses import CategoricalCrossentropy
-from tensorflow.keras.metrics import CategoricalAccuracy
-from tensorflow.keras.optimizers import Adam
+from tensorflow.python.keras import backend as K
+from tensorflow.python.keras.losses import CategoricalCrossentropy
+from tensorflow.python.keras.metrics import CategoricalAccuracy
+from tensorflow.python.keras.optimizers import Adam
 
 from src.modules.transforms import Float, NormalizeSphere, RemoveEdgeFeats
 

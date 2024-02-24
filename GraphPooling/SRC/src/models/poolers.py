@@ -1,4 +1,4 @@
-from tensorflow.keras import Model
+from tensorflow.python.keras import Model
 
 
 class SimplePooler(Model):

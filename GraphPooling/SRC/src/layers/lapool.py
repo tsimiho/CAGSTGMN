@@ -1,7 +1,7 @@
 import tensorflow as tf
 from scipy import sparse
 from spektral.layers import ops
-from tensorflow.keras import backend as K
+from tensorflow.python.keras import backend as K
 
 from src.layers.src import SRCPool
 

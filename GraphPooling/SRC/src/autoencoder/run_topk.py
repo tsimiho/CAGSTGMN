@@ -1,7 +1,7 @@
 import argparse
 
 import tensorflow as tf
-from tensorflow.keras.layers import Lambda
+from tensorflow.python.keras.layers import Lambda
 
 from src.autoencoder.training import results_to_file, run_experiment
 from src.layers.topk import TopKPool

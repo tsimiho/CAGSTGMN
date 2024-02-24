@@ -1,6 +1,6 @@
 from spektral.layers import GeneralConv
 from spektral.models.general_gnn import MLP
-from tensorflow.keras import Model
+from tensorflow.python.keras import Model
 from tensorflow.python.keras.layers import Concatenate
 
 

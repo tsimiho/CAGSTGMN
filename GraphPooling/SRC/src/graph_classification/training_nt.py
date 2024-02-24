@@ -5,7 +5,7 @@ from spektral.data import Loader
 from spektral.data.utils import to_disjoint
 from spektral.layers import ops
 from spektral.layers.ops import sp_matrix_to_sp_tensor
-from tensorflow.keras.layers import Lambda
+from tensorflow.python.keras.layers import Lambda
 
 from src.graph_classification.training import load_dataset, main
 from src.models.classifiers import MfreeModel

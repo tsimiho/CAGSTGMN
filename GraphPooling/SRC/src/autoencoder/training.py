@@ -2,7 +2,7 @@ import time
 
 import numpy as np
 import tensorflow as tf
-import tensorflow.keras.backend as K
+import tensorflow.python.keras.backend as K
 from spektral.layers import ops
 
 from src.modules.data import make_dataset

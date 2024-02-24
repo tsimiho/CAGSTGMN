@@ -1,6 +1,6 @@
 import argparse
 
-from tensorflow.keras.layers import Lambda
+from tensorflow.python.keras.layers import Lambda
 
 from src.autoencoder.run_topk import upsampling_top_k
 from src.autoencoder.training import results_to_file, run_experiment

@@ -1,8 +1,7 @@
 import torch
-from torch_geometric.nn import MessagePassing, BatchNorm
+from torch_geometric.nn import BatchNorm, MessagePassing
 from torch_scatter import scatter_mean
-
-from .utils import batch_block_pair_attention
+from utils import batch_block_pair_attention
 
 
 class GraphConvolution(MessagePassing):

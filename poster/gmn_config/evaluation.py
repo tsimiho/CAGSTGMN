@@ -1,5 +1,5 @@
 from sklearn import metrics
-from .loss import *
+from loss import *
 from torch.nn.functional import cosine_similarity
 
 
