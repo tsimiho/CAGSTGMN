@@ -10,7 +10,7 @@ def get_default_config():
         edge_state_dim=edge_state_dim,
         edge_hidden_sizes=[node_state_dim * 2, node_state_dim * 2],
         node_hidden_sizes=[node_state_dim * 2],
-        n_prop_layers=8,
+        n_prop_layers=6,
         # set to False to not share parameters across message passing layers
         share_prop_params=True,
         # initialize message MLP with small parameter weights to prevent
@@ -72,7 +72,7 @@ def get_default_config():
             # Add gradient clipping to avoid large gradients.
             clip_value=10.0,
             # Increase this to train longer.
-            n_training_steps=5000,
+            n_training_steps=10000,
             # Print training information every this many training steps.
             print_after=100,
             # Evaluate on validation set every `eval_after * print_after` steps.
